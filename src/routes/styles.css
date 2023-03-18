@@ -73,7 +73,9 @@ button:focus {
     background-color: none !important;
 }
 
-.theme {
+:root {
+    /** CONTENT */
+
     --padding-s: 4px;
     --padding-m: 8px;
     --padding-l: 12px;
@@ -84,6 +86,7 @@ button:focus {
 
     /** DARK */
 
+    --link-dark-color: #6aa8ff;
     --primary-dark-color: #000000;
     --secondary-dark-color: #999999;
 
@@ -95,6 +98,7 @@ button:focus {
 
     /** LIGHT */
 
+    --link-light-color: #1500b0;
     --primary-light-color: #ffffff;
     --secondary-light-color: #cccccc;
 
@@ -106,6 +110,7 @@ button:focus {
 }
 
 .theme_type_light {
+    --link-color: var(--link-light-color);
     --primary-color: var(--primary-dark-color);
     --secondary-color: var(--secondary-dark-color);
 
@@ -117,6 +122,7 @@ button:focus {
 }
 
 .theme_type_dark {
+    --link-color: var(--link-dark-color);
     --primary-color: var(--primary-light-color);
     --secondary-color: var(--secondary-light-color);
 

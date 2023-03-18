@@ -1,13 +1,16 @@
 <script lang="ts">
-    import Checkbox from '@/components/Checkbox/Checkbox.svelte';
+    import Eye from '@/images/Eye/Eye.svelte';
     import Image from '@/components/Image/Image.svelte';
+    import Checkbox from '@/components/Checkbox/Checkbox.svelte';
     import TextInput from '@/components/TextInput/TextInput.svelte';
-    import Header from '@/layouts/Header/Header.svelte';
+
     import Main from '@/layouts/Main/Main.svelte';
+    import Header from '@/layouts/Header/Header.svelte';
+
     import { isMatchSearch } from '@/lib/regexp/isMatchSearch';
 
     import type { PageData } from './$types';
-    import Hidden from './Hidden.svelte';
+    import { i18n } from './page.i18n';
 
     export let data: PageData;
 
@@ -25,15 +28,13 @@
 </script>
 
 <Header fixed>
-    <div class="form">
-        <Checkbox size={24} bind:checked={showDone}>
-            <span slot="addonRight">Show done</span>
-        </Checkbox>
-        <Checkbox size={24} bind:checked={hideSecret}>
-            <span slot="addonRight">Hide secret achievements</span>
-        </Checkbox>
-        <TextInput bind:value={searching} />
-    </div>
+    <Checkbox size={24} bind:checked={showDone}>
+        <span slot="addonRight">{$i18n('Показать полученные')}</span>
+    </Checkbox>
+    <Checkbox size={24} bind:checked={hideSecret}>
+        <span slot="addonRight">{$i18n('Спрятать секретные ачивки')}</span>
+    </Checkbox>
+    <TextInput bind:value={searching} />
 </Header>
 
 <Main>
@@ -50,18 +51,13 @@
                     </div>
                 {/if}
             </span>
-            <Hidden width="32px" height="32px" style={ach.hidden !== 1 ? 'opacity: 0' : '1'} />
+            <Eye width="32px" height="32px" style={ach.hidden !== 1 ? 'opacity: 0' : '1'} />
             <div class="achieved" style:opacity={Boolean(current?.[ach.name]?.achieved) ? 1 : 0} />
         </div>
     {/each}
 </Main>
 
 <style>
-    .form {
-        display: flex;
-        justify-content: center;
-    }
-
     :global(.form > *) {
         margin-right: 15px;
     }

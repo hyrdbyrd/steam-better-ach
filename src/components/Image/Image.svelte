@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Spin from '@/components/Spin/Spin.svelte';
-    import Rejected from '@/components/Rejected/Rejected.svg.svelte';
+    import Spin from '@/images/Spin/Spin.svelte';
+    import Rejected from '@/images/Rejected/Rejected.svg.svelte';
 
     export let src: string;
     export let alt: string;
@@ -34,12 +34,12 @@
     <img
         {src}
         {alt}
-        on:load={() => (isLoading = false)}
-        on:error={() => ((isLoading = false), (isErrored = true))}
         style:width
         style:height
         class:isLoading
         class:isErrored
+        on:load={() => (isLoading = false)}
+        on:error={() => ((isLoading = false), (isErrored = true))}
     />
 </div>
 

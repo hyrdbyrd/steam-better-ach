@@ -4,20 +4,23 @@
     export let checked = false;
 
     export let size: number = 16;
+    export let input: HTMLInputElement | null = null;
 </script>
 
 <div class="wrapper" class:checked>
-    <input {...$$restProps} type="checkbox" bind:checked />
+    <input {...$$restProps} bind:this={input} type="checkbox" bind:checked />
 
     {#if $$slots.addonLeft}
         <slot name="addonLeft" />
     {/if}
 
-    <div class="checkbox" style:--size={size} style:width="{size}px" style:height="{size}px">
-        {#if checked}
-            <div class="fill" transition:scale={{ duration: 200 }}>✔</div>
-        {/if}
-    </div>
+    <slot name="checker">
+        <div class="checkbox" style:width="{size}px" style:height="{size}px">
+            {#if checked}
+                <div class="fill" transition:scale={{ duration: 200 }}>✔</div>
+            {/if}
+        </div>
+    </slot>
 
     {#if $$slots.addonRight}
         <slot name="addonRight" />

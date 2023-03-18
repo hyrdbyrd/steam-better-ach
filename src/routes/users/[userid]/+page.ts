@@ -22,7 +22,7 @@ export const load = (async ({ fetch, params, url }) => {
         (e) => e.json()
     );
 
-    if (!data.success || !data.games) throw redirect(300, '/');
+    if (!data.success || !data.games?.length) throw redirect(300, '/');
 
     return { games: data.games, userid };
 }) satisfies PageLoad;

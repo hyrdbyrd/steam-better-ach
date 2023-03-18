@@ -11,17 +11,14 @@
 </script>
 
 <script lang="ts">
-    import { theme, type ThemeType } from '@/store/theme';
+    import { theme, THEME_SWITCHER, type ThemeType } from '@/store/theme';
 
-    import MoonSvg from './Moon.svg.svelte';
-    import SunSvg from './Sun.svg.svelte';
+    import MoonSvg from '@/images/Moon/Moon.svg.svelte';
+    import SunSvg from '@/images/Sun/Sun.svg.svelte';
 
     import type { ComponentType } from 'svelte';
 
-    const changeTheme = () => {
-        if ($theme === 'dark') $theme = 'light';
-        else $theme = 'dark';
-    };
+    const changeTheme = () => ($theme = THEME_SWITCHER[$theme]);
 </script>
 
 <button on:click={changeTheme}>

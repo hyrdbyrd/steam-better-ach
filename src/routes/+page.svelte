@@ -4,31 +4,29 @@
     import Main from '@/layouts/Main/Main.svelte';
     import Header from '@/layouts/Header/Header.svelte';
 
-    import Spin from '@/components/Spin/Spin.svelte';
+    import Spin from '@/images/Spin/Spin.svelte';
+
+    import Link from '@/components/Link/Link.svelte';
     import Image from '@/components/Image/Image.svelte';
     import TextInput from '@/components/TextInput/TextInput.svelte';
 
     import { url, user, userData } from '@/store/user';
 
+    import { i18n } from './page.i18n';
+
     $: player = ($userData.success && $userData.players[0]) || undefined;
 </script>
 
 <Header fixed>
-    <TextInput bind:value={$url} class="input">
-        <div slot="addonLeft">
-            <Spin class={cls('loader', $user?.isLoading && 'loading')} />
-        </div>
-        <div slot="addonRight">
-            {#if !$url}
-                <div class="status empty" />
-            {:else if $user.isLoading}
-                <div class="status loading" />
-            {:else if $user.data?.success}
-                <div class="status success" />
-            {:else}
-                <div class="status rejected" />
-            {/if}
-        </div>
+    <TextInput bind:value={$url} class="input" placeholder={$i18n('Логин профиля')}>
+        <Spin slot="addonLeft" class={cls('loader', $user?.isLoading && 'loading')} />
+        <div
+            slot="addonRight"
+            class:empty={!$url}
+            class="status rejected"
+            class:loading={$user.isLoading}
+            class:success={$user.data?.success}
+        />
     </TextInput>
 </Header>
 
@@ -40,7 +38,8 @@
                 <span class="name">
                     {player.personaname}
                 </span>
-                <a class="link" href="/user/{player.steamid}">Yes, it's mine</a>
+                <br />
+                <Link href="/users/{player.steamid}">{$i18n('Да, это мой профиль')}</Link>
             </span>
         </div>
     {/if}
@@ -87,8 +86,10 @@
         background-color: var(--bg);
     }
 
-    .empty {
-        --bg: gray;
+    /* Порядок перечисления статусов важен! */
+
+    .rejected {
+        --bg: red;
     }
 
     .loading {
@@ -99,7 +100,7 @@
         --bg: green;
     }
 
-    .rejected {
-        --bg: red;
+    .empty {
+        --bg: gray;
     }
 </style>

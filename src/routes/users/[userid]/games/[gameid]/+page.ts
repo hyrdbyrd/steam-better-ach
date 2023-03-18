@@ -1,9 +1,8 @@
 import type { AchivementsPlayerStats, SchemaForGame } from '@/types';
+
 import type { PageLoad } from './$types';
 
-export const prerender = 'auto';
-
-export const ssr = true;
+export const prerender = false;
 
 export const load = (async ({ params, fetch }) => {
     const { userid, gameid } = params;

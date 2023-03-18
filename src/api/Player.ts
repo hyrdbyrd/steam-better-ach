@@ -14,7 +14,7 @@ export class PlayerApi extends BackendRequester {
 
     getOwnedGames = (steamid: string) =>
         this.get<PlayerOwnedGames>('/GetOwnedGames/v0001/', {
-            params: { steamid, include_appinfo: true, include_extended_appinfo: true },
+            params: { steamid, include_appinfo: true, include_extended_appinfo: true, filter: 'achievements' },
         }).then<ApiResponse<PlayerOwnedGames_Data>>((e) => {
             if (this.isRejected(e)) return e;
             return { ...e.response, success: true };
